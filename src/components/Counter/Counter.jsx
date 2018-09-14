@@ -31,18 +31,25 @@ const Counter = ({title, unit, step, min, max, value, onCounterIncrement, onCoun
         <p className="tesla-counter__title">{title}</p>
         <div className="tesla-counter__container cf">
           <div 
-            className="tesla-counter__item">
+            className="tesla-counter__item"
+            tabIndex="0">
             <p className="tesla-counter__number">
                 {value}
               <span>{unit}</span>
             </p>
-            <div className="tesla-counter__controls">
+            <div className="tesla-counter__controls" tabIndex="-1">
               <button 
                 onClick={onIncrement}
-                ></button>
+                tabIndex="-1"
+                disabled={value === max}
+                >
+              </button>
               <button 
                 onClick={onDecrement}
-                ></button>
+                tabIndex="-1"
+                disabled={value === min}
+                >
+              </button>
             </div>
           </div>
         </div>

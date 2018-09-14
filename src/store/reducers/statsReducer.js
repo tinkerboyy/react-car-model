@@ -1,4 +1,4 @@
-import { GET_INITIAL_STATS, CHANGE_STATS } from '../actions/climateActions';
+import { GET_INITIAL_STATS, CHANGE_STATS } from '../actions/statsActions';
 
 const INITIAL_VALUE = {
   speed: 55,
@@ -18,9 +18,9 @@ export default function reducer(state = [], action) {
     case CHANGE_STATS:
       state = calculateStats(results, payload);
       return state;
+    default:
+      return false;
   }
-
-  return state;
 }
 
 const allModels = {

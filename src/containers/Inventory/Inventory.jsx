@@ -1,12 +1,13 @@
 import React, {Component, Fragment} from 'react';
 import { connect } from 'react-redux';
+import './Inventory.css';
 import Car from '../../components/Car/Car';
 import Wheels from '../../components/Wheels/Wheels';
 import Counter from '../../components/Counter/Counter';
 import Stats from '../../components/Stats/Stats';
 import Climate from '../../components/Climate/Climate';
 
-import { getCarStats, getInitialStats } from '../../store/actions/climateActions';
+import { getCarStats, getInitialStats } from '../../store/actions/statsActions';
 
 const speed = {
   step: 5,
@@ -103,7 +104,7 @@ class Inventory extends Component {
                 value={this.state.temperature}
                 onCounterIncrement={this.tempIncrement}
                 onCounterDecrement={this.tempDecrement}
-                />
+              />
             <div className="tesla-climate cf">
               <Climate 
                 limit={this.state.temperature > 10}
