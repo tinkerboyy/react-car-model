@@ -6,7 +6,6 @@ const Counter = ({title, unit, step, min, max, value, onCounterIncrement, onCoun
   let count = value;
 
   const onIncrement = (event) => {
-
     event.preventDefault();
     event.stopPropagation();
 

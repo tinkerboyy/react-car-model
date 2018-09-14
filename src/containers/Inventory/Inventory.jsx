@@ -4,6 +4,7 @@ import Car from '../../components/Car/Car';
 import Wheels from '../../components/Wheels/Wheels';
 import Counter from '../../components/Counter/Counter';
 import Stats from '../../components/Stats/Stats';
+import Climate from '../../components/Climate/Climate';
 
 import { getCarStats, getInitialStats } from '../../store/actions/climateActions';
 
@@ -28,7 +29,6 @@ class Inventory extends Component {
     super(props);
 
     this.state = {
-      stats: [],
       speed: 55,
       temperature: 20,
       climate: true,
@@ -39,28 +39,49 @@ class Inventory extends Component {
     this.speedDecrement = this.speedDecrement.bind(this);
     this.tempIncrement = this.tempIncrement.bind(this);
     this.tempDecrement = this.tempDecrement.bind(this);
+    this.onWheelChange = this.onWheelChange.bind(this);
+    this.onClimateChange = this.onClimateChange.bind(this);
   }
 
   componentWillMount() {
     this.props.getInitialStats();
   }
 
+  onWheelChange(e) {
+    const newState = { ...this.state, wheels: e.target.value};
+    this.setState({wheels: e.target.value});
+    this.props.getCarStats(newState);
+  }
+
   speedIncrement(speed) {
-    this.setState({speed})
-    this.props.getCarStats(this.state)
+    const newState = { ...this.state, speed};
+    this.setState({speed});
+    this.props.getCarStats(newState);
   }
 
   speedDecrement(speed) {
-    this.setState({speed})
+    const newState = { ...this.state, speed};
+    this.setState({speed});
+    this.props.getCarStats(newState)
   }
 
   tempIncrement(temperature) {
+    const newState = { ...this.state, temperature};
     this.setState({temperature})
+    this.props.getCarStats(newState)
 
   }
 
   tempDecrement(temperature) {
+    const newState = { ...this.state, temperature};
     this.setState({temperature})
+    this.props.getCarStats(newState)
+  }
+
+  onClimateChange(e) {
+    const newState = { ...this.state, climate: e.target.checked};
+    this.setState({climate: e.target.checked});
+    this.props.getCarStats(newState);
   }
 
   render() {
@@ -77,16 +98,19 @@ class Inventory extends Component {
               onCounterIncrement={this.speedIncrement}
               onCounterDecrement={this.speedDecrement}
               />
-            <div className="tesla-climate cf">
-               <Counter 
+              <Counter 
                 { ...temperature }
                 value={this.state.temperature}
                 onCounterIncrement={this.tempIncrement}
                 onCounterDecrement={this.tempDecrement}
                 />
-              {/* <Climate />  */}
+            <div className="tesla-climate cf">
+              <Climate 
+                limit={this.state.temperature > 10}
+                climate={this.state.climate} 
+                onClimateChange={this.onClimateChange}/> 
             </div>
-            <Wheels wheels={this.state.wheels}/>
+            <Wheels wheels={this.state.wheels} onWheelChange={this.onWheelChange}/>
           </div>
           <div className="tesla-battery__notice">
             <p>

@@ -1,8 +1,4 @@
-import {
-  GET_INITIAL_STATS,
-  INCREMENT_SPEED,
-  DECREMENT_SPEED
-} from '../actions/climateActions';
+import { GET_INITIAL_STATS, CHANGE_STATS } from '../actions/climateActions';
 
 const INITIAL_VALUE = {
   speed: 55,
@@ -19,11 +15,9 @@ export default function reducer(state = [], action) {
     case GET_INITIAL_STATS:
       state = calculateStats(results, payload);
       return state;
-    case INCREMENT_SPEED:
+    case CHANGE_STATS:
       state = calculateStats(results, payload);
       return state;
-    case DECREMENT_SPEED:
-      return state - 1;
   }
 
   return state;
@@ -1318,7 +1312,6 @@ const allModels = {
 
 const calculateStats = (models, value = INITIAL_VALUE) => {
   return models.map(model => {
-    console.log(value);
     const { speed, temperature, climate, wheels } = value;
     const miles =
       allModels[model][wheels][climate ? 'on' : 'off'].speed[speed][
