@@ -105,7 +105,7 @@ class Inventory extends Component {
                 onCounterIncrement={this.tempIncrement}
                 onCounterDecrement={this.tempDecrement}
               />
-            <div className="tesla-climate cf">
+            <div className="tesla-temp cf">
               <Climate 
                 limit={this.state.temperature > 10}
                 climate={this.state.climate} 
