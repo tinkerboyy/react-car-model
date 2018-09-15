@@ -1,6 +1,3 @@
-https://react-model-car.herokuapp.com/
-
-
 # Car model features React - Redux
 
 
